@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public struct Punt
+    public class Punt
     {
-        public int A;
-        public int B;
-        public Punt (int a, int b) 
+        public double A;
+        public double B;
+        public Punt (double a, double b) 
         {
             A = a;
             B = b;
@@ -27,7 +27,9 @@ namespace WindowsFormsApp1
         //variable member declared outside of any specific function, in order to make it available throughout the class in all functions
         int mendelBrotGetal;
         int width = 1000;
-        int height = 500; 
+        int height = 500;
+        double scale = 0.01;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace WindowsFormsApp1
             //the next few lines deal with applying the mendelFunction to one pixel(x,y)
             
             //we  make a nested for loop here to let it run through every pixel
-            for (int x = 0; x<width; x++)
+            for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
@@ -54,12 +56,14 @@ namespace WindowsFormsApp1
                     mendelBrotGetal = 0;
 
 
-                    Punt coordinaat = new Punt(x, y);
+                    Punt coordinaat = new Punt((x - width / 2) * scale, (y - height / 2) * scale);
                     Punt varPunt = new Punt(0, 0);
                     //coordinaat is constant and refers to the position of the pixel
                     // varPunt is variable, a linear transformation or function is applied to it several times and it changes each time
 
-                    //here we apply the function to varPunt until its distance to the origin is more than 2 OR the mendelbrotgetal gets above 100 (the collegedictaat suggested this to mean mendelbrotgetal = infinite)
+                    /* Here we apply the function to varPunt until its distance to the origin is more than 2 
+                    OR the mendelbrotgetal gets above 100 (the collegedictaat suggested this to mean mendelbrotgetal = infinite) */
+
                     while (afstand < 2 && mendelBrotGetal < 100)
                     {
                         // the new variable point varPunt(a,b) is the output of the mendelbrotfunction(a,b) using itself as input
@@ -88,9 +92,12 @@ namespace WindowsFormsApp1
                     // TODO: now we have the mendelbrotgetal for any coordinaat(x,y) or pixel(x,y) on the window !
                     // TODO: here we should paint the given pixel black or white
                     image.SetPixel(x, y, kleur);
-                    pea.Graphics.DrawImage(image, 0, 0, width, height);
+
+
                 }
+                
             }
+            pea.Graphics.DrawImage(image, 0, 0, width, height);
         }
 
         Punt mendelbrotfunctie(Punt varPunt, Punt coordinaat)

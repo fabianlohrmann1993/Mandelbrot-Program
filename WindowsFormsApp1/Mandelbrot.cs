@@ -22,15 +22,15 @@ namespace WindowsFormsApp1
         }
     }
 
-    public partial class Form1 : Form
+    public partial class Mandelbrot : Form
     {
         //variable member declared outside of any specific function, in order to make it available throughout the class in all functions
         int mendelBrotGetal;
         int width = 1000;
         int height = 500;
-        double scale = 0.01;
+        double scale = 0.01; // scale is nu goed, maar werkt niet echt als je het 10x kleiner maakt, met 100x helemaal zwart...
 
-        public Form1()
+        public Mandelbrot()
         {
             InitializeComponent();
             this.Text = "Mendelbrot";
@@ -45,20 +45,23 @@ namespace WindowsFormsApp1
             Bitmap image = new Bitmap(width,height);
 
             //the next few lines deal with applying the mendelFunction to one pixel(x,y)
-            
+
             //we  make a nested for loop here to let it run through every pixel
-            for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
             {
-                for (int y = 0; y < height; y++)
+
+                for (int x = 0; x < width; x++)
                 {
 
                     double afstand = 0;
                     mendelBrotGetal = 0;
 
-
+                    // coordinaat ingesteld zodat het ook negatieve waardes aanneemt.
+                    // scale kan je instellen zodat x wordt gescaled naar andere waardes
                     Punt coordinaat = new Punt((x - width / 2) * scale, (y - height / 2) * scale);
                     Punt varPunt = new Punt(0, 0);
-                    //coordinaat is constant and refers to the position of the pixel
+
+                    // coordinaat is constant and refers to the position of the pixel
                     // varPunt is variable, a linear transformation or function is applied to it several times and it changes each time
 
                     /* Here we apply the function to varPunt until its distance to the origin is more than 2 
@@ -73,8 +76,8 @@ namespace WindowsFormsApp1
                         afstand = System.Math.Sqrt(varPunt.A * varPunt.A + varPunt.B * varPunt.B);
                     }
 
-                    //convert the MendelbrotGetal to a color
-                    //even MendelbrotGetallen become white, uneven become black, infinite also become black
+                    // convert the MendelbrotGetal to a color
+                    // even MendelbrotGetallen become white, uneven become black, infinite also become black
                     Color kleur;
                     if (mendelBrotGetal == 100)
                     {
@@ -97,6 +100,7 @@ namespace WindowsFormsApp1
                 }
                 
             }
+            // Draw image (should be outside for-loops)
             pea.Graphics.DrawImage(image, 0, 0, width, height);
         }
 

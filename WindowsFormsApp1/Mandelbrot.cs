@@ -40,6 +40,7 @@ namespace WindowsFormsApp1
             this.Size = new Size(widthForm, heightForm);
             panel2.Paint += this.tekenscherm;
             this.Click += this.button1_Click;
+            panel2.MouseClick += this.mouse_click;
         }
 
         void tekenscherm(object o, PaintEventArgs pea)
@@ -127,6 +128,14 @@ namespace WindowsFormsApp1
                 midY = Double.Parse(TmidY.Text);
                 panel2.Invalidate();
       
+        }
+        private void mouse_click(object sender, MouseEventArgs mea)
+        {
+            midX = (mea.X - width / 2)  * scale;
+            midY = (mea.Y - height / 2)  * scale;
+            scale = scale / 2;
+            
+            panel2.Invalidate();
         }
 
         private void label3_Click(object sender, EventArgs e)

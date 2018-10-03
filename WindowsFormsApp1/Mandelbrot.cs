@@ -119,14 +119,14 @@ namespace WindowsFormsApp1
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            // User Interface veranderingen aangegeven in de textboxen
-            scale = Double.Parse(Tscale.Text);
-            maxgetal = int.Parse(Tmaxgetal.Text);
-            midX = Double.Parse(TmidX.Text); // moeten we scalen
-            midY = Double.Parse(TmidY.Text);
-            panel2.Invalidate();
-
+        {  
+                // User Interface veranderingen aangegeven in de textboxen
+                scale = Double.Parse(Tscale.Text);
+                maxgetal = int.Parse(Tmaxgetal.Text);
+                midX = Double.Parse(TmidX.Text); // moeten we scalen
+                midY = Double.Parse(TmidY.Text);
+                panel2.Invalidate();
+      
         }
 
         private void label3_Click(object sender, EventArgs e)
